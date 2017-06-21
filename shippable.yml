@@ -27,7 +27,7 @@ build:
     - docker ps
     
   post_ci:
-    - docker push shippabledocker/u16phpall:$SHIPPABLE_PHP_VERSION
+    - docker push shippabledocker/u14phpall:$SHIPPABLE_PHP_VERSION
 
 integrations:
   hub:

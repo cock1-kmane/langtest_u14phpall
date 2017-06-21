@@ -10,10 +10,18 @@ php:
   - "7.1"
 build:  
 
-  pre_ci_boot:
-    image_name: drydock/u14phpall
-    image_tag: master
-    pull: true
+  pre_ci:
+    - echo The PHP version is $SHIPPABLE_PHP_VERSION
     
+ # pre_ci_boot:
+ #  image_name: drydock/u16phpall
+ #  image_tag: master
+ #  pull: false
+   
   ci:
+    - echo The PHP version is $SHIPPABLE_PHP_VERSION
     - php --version
+    - lsb_release -a
+    - docker --version
+    - docker info
+    - docker ps

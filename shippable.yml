@@ -9,14 +9,14 @@ php:
   - "7.0"
   - "7.1"
 build:  
-
-  pre_ci:
+pre_ci:
     - echo The PHP version is $SHIPPABLE_PHP_VERSION
+    - docker build -t=shippabledocker/u14phpall:$SHIPPABLE_PHP_VERSION .
     
- # pre_ci_boot:
- #  image_name: drydock/u16phpall
- #  image_tag: master
- #  pull: false
+  pre_ci_boot:
+   image_name: shippabledocker/u14phpall
+   image_tag: $SHIPPABLE_PHP_VERSION
+   pull: false
    
   ci:
     - echo The PHP version is $SHIPPABLE_PHP_VERSION
@@ -25,3 +25,11 @@ build:
     - docker --version
     - docker info
     - docker ps
+    
+  post_ci:
+    - docker push shippabledocker/u16phpall:$SHIPPABLE_PHP_VERSION
+
+integrations:
+  hub:
+    - integrationName: ship-docker
+      type: docker
